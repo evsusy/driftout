@@ -1,0 +1,25 @@
+Package: driftout
+Type: Package
+Title: Package for signal processing of sensor array data under drift
+    conditions.
+Version: 0.1
+Date: 2013-05-10
+Author: Susana Albarracín
+Maintainer: Susana Albarracín <susana@somewhere.com>
+Description: Package for signal processing of sensor array data under drift
+    conditions.
+License: GPL (>= 3)
+LazyData: yes
+LazyLoad: yes
+Depends:
+    methods,
+    caret,
+    plyr,
+    ggplot2,
+Suggests:
+    doMC
+Collate:
+    'support.lib.R'
+    'moduleClass.R'
+    'moduleSplit.R'
+    
