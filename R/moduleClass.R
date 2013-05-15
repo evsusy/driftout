@@ -2,14 +2,14 @@
 moduleClass.train <- function(input)
 {
   ### input
-  stopifnot(all(c("X", "Y", "trainInd", "testInd", "method") %in% names(input)))
+  stopifnot(all(c("X", "Y", "trainInd", "testInd", "methodClass") %in% names(input)))
   Xt <- input$X[input$trainInd, ]
   Yt <- input$Y[input$trainInd]
-  method <- input$method
+  methodClass <- input$methodClass
   
   stopifnot(class(Xt) %in% c("data.frame", "matrix"))
   stopifnot(class(Yt) == "factor")
-  stopifnot(class(method) == "character")
+  stopifnot(class(methodClass) == "character")
 
   Xt <- as.matrix(Xt) # requirement by caret
     
@@ -17,7 +17,7 @@ moduleClass.train <- function(input)
   
   ### train
   library(caret)
-  model <- train(Xt, Yt, method = method)
+  model <- train(Xt, Yt, method = methodClass)
   
   ### evaluate the model
   Yp <- predict(model, Xt)

@@ -5,10 +5,10 @@ Title: Package for signal processing of sensor array data under drift
 Version: 0.1
 Date: 2013-05-10
 Author: Susana Albarracín
-Maintainer: Susana Albarracín <susana@somewhere.com>
+Maintainer: Susana Albarracín <evsusy@gmail.com>
 Description: Package for signal processing of sensor array data under drift
     conditions.
-License: GPL (>= 3)
+License: GPL (>= 2)
 LazyData: yes
 LazyLoad: yes
 Depends:
@@ -16,10 +16,19 @@ Depends:
     caret,
     plyr,
     ggplot2,
+    chemosensors,
+    reshape,
+    grid,
+    e1071,
+    SparseM
 Suggests:
     doMC
 Collate:
     'support.lib.R'
     'moduleClass.R'
     'moduleSplit.R'
+    'moduleGenXYsanD.R'
+    'moduleGenXYuniS.R'
+    'moduleDrift.R'
+    
     

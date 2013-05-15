@@ -7,3 +7,9 @@ addList <- function(out, add)
   out <- c(out, add) 
   return(out)  
 }
+
+defaulInput <- function()
+{
+  list(trainSize = 50, methodClass = "knn")
+}  
+  
