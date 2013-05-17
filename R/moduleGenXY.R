@@ -105,7 +105,9 @@ Read.to.batch<- function(input)
     Y<-rbind(Y,Y0)
   }
   
-  output<-list(X=X, Y=Y)
+  Y<-as.factor(Y)
+  Y<-(LETTERS[Y])
+  output<-list(X=X, Y=as.factor(Y))
   
   save(X, Y, file = "/home/susana/Documents/projetcs/driftout/data/SanDiego.XY.RData")
   
@@ -141,7 +143,10 @@ Read.only.batch<- function(input)
     Y<-rbind(Y,Y0)
   }
   
-  output<-list(X=X, Y=Y)
+  Y<-as.factor(Y)
+  Y<-(LETTERS[Y])
+  
+  output<-list(X=X, Y=as.factor(Y))
   
   save(X, Y, file = "/home/susana/Documents/projetcs/driftout/data/SanDiego.XY.RData")
   
