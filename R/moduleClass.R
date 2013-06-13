@@ -1,4 +1,4 @@
-moduleClass<- function (input)
+﻿moduleClass<- function (input)
 {
   stopifnot("DataBase" %in% names(input) )
   stopifnot(all(c("Xtrain", "Ytrain","Xtest", "Ytest", "methodClass", "trainInd") %in% names(input)))
@@ -14,7 +14,8 @@ moduleClass<- function (input)
   output <- c(input, output) 
   return(output)
 }
-  
+  #######
+########
 
 class.gen <- function(input)
 {
