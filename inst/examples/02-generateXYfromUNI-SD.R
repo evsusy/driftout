@@ -40,12 +40,33 @@ rm(A)
 a<-list(DataBase="SanDiego", trainIni = 1, trainFin = 5)
 A<-moduleSplit(a)
 summary(A)
+
+### train
 dim(A$train$Xtrain)
-dim(A$test$Xtest)
+dim(as.matrix((A$train$Ytrain)))
+
+### test
+
+
+dim(A$test$Xtest[[6]])
+dim(as.matrix((A$test$Ytest[[6]])))
+
+dim(A$test$Xtest[[7]])
+dim(as.matrix((A$test$Ytest[[7]])))
+
+dim(A$test$Xtest[[8]])
+dim(as.matrix((A$test$Ytest[[8]])))
+
+dim(A$test$Xtest[[9]])
+dim(as.matrix((A$test$Ytest[[9]])))
+
+dim(A$test$Xtest[[10]])
+dim(as.matrix((A$test$Ytest[[10]])))
+
 
 ###3 probe test.Sandiego(input)
 rm(A)
 a<-list(DataBase="SanDiego", trainIni = 1, trainFin = 3)
 A<-test.SanDiego(a)
-Y<-(A$Ytest)
+
 

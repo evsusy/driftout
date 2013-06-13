@@ -14,6 +14,7 @@
 
 moduleGenXY <- function(input)
 {
+  
   stopifnot("DataBase" %in% names(input) )
   DataBase <- input$DataBase
   
@@ -37,7 +38,8 @@ GenerateXY.uniS <- function(input)
   ###Posee 8 clases (Amoniaco 0.01,0.02 0.05 - Acido Propanoico 0.01, 0.02, 0.05 - N-buthanol 0.1, 1) (200x3)
 
   #Matriz dat, posee 200 filas y 17 columnas, contiene las señales de estado estable de 17 sensores en respuesta la perfil de concentracion
-  
+ 
+  library(chemosensors)
   X <- UNIMANshort$dat
   
   # se extrae la matriz C que es la matriz de concentración 200 filas y 3 columnas
@@ -51,11 +53,9 @@ GenerateXY.uniS <- function(input)
   Y0 <- paste(gas, conc)
   Y0<- as.factor(Y0)
   Y<-as.factor(gas)
-output <- list(X = X, Y = Y, conc=conc)
-  ### save
-  output <- c(output)  
   
-    save(X, Y, conc, file = "/home/susana/Documents/projetcs/driftout/data/UNIMANshort.XY.RData")
+  output <- list(X = X, Y = Y, conc=conc)
+  save(X, Y, conc, file = "/home/susana/Documents/projetcs/driftout/data/UNIMANshort.XY.RData")
   
   return(output)
   
@@ -66,60 +66,7 @@ output <- list(X = X, Y = Y, conc=conc)
 
 GenerateXY.sanD <- function(input)
 {
-  
-  batch<-input$batch
-  output <- switch(batch,
-                   "to" = Read.to.batch(input),
-                   "this" = Read.only.batch(input),
-                    stop("Error in switch"))
- 
-   return(output)
-}
-
-
-## CASE 2.1 Lee San Diego hasta el batch = num
-
-Read.to.batch<- function(input)
-{
-  fichero<-"/home/susana/Documents/projetcs/driftout/data/data bases UCI"
-  files=file.path(fichero, list.files(fichero))
-  fin<-input$fin
-  
-  
-  stopifnot(class(fin)=="numeric")
-  
-  ## matriz X, Y vacía
-  X<- matrix(nrow=0, ncol=128)
-  Y<- matrix(nrow=0, ncol=1)
-  
-  ### leer los datos
-  
-  
-  for(i in 1:fin)
-  {
-    data <- read.matrix.csr(files[i])
-    X0<-(as.matrix(data$x))
-    X<-rbind(X,X0)
-    
-    Y0<-as.matrix(data$y)
-    Y<-rbind(Y,Y0)
-  }
-  
-  Y<-as.factor(Y)
-  Y<-(LETTERS[Y])
-  output<-list(X=X, Y=as.factor(Y))
-  
-  save(X, Y, file = "/home/susana/Documents/projetcs/driftout/data/SanDiego.XY.RData")
-  
-  return(output)
-} 
-
-
-## CASE 2.2 Lee San Diego desde el batch = ini hasta el batch = fin
-
-Read.only.batch<- function(input)
-{
-  fichero<-"/home/susana/Documents/projetcs/driftout/data/data bases UCI"
+  fichero<-"C:/Users/SUSY/Documents/maestria/driftout/data/data bases UCI"
   files=file.path(fichero, list.files(fichero))
   ini<-input$ini
   fin<-input$fin
@@ -127,34 +74,30 @@ Read.only.batch<- function(input)
   stopifnot(class(ini)=="numeric", class(fin)=="numeric")
   
   ## matriz X, Y vacía
-  X<- matrix(nrow=0, ncol=128)
+  X<- matrix(nrow=0, ncol=16)
   Y<- matrix(nrow=0, ncol=1)
   
   ### leer los datos
-  
-  
+    
   for(i in ini:fin)
   {
     data <- read.matrix.csr(files[i])
     X0<-(as.matrix(data$x))
-    X<-rbind(X,X0)
-    
+    X1<-readate(X0)
+    X<-rbind(X,X1)
     Y0<-as.matrix(data$y)
     Y<-rbind(Y,Y0)
   }
   
   Y<-as.factor(Y)
   Y<-(LETTERS[Y])
+  row.names(X)<-NULL
   
   output<-list(X=X, Y=as.factor(Y))
   
-  save(X, Y, file = "/home/susana/Documents/projetcs/driftout/data/SanDiego.XY.RData")
-  
+  save(X, Y, file = "C:/Users/SUSY/Documents/maestria/driftout/data/SanDiego.XY.RData")  
   return(output)
-  
-}
+ }
 
 
-  
-  
-  
+
